@@ -11,9 +11,14 @@ var delay = 3;
 let voices = [];
 window.speechSynthesis.onvoiceschanged = () => {
   voices = window.speechSynthesis.getVoices();
-  speech.voice = voices[300];
-  let voiceSelect = document.querySelector("#voices");
-  voices.forEach((voice, i) => (voiceSelect.options[i] = new Option(voice.name, i)));
+  voices.forEach((voice) => {
+    if("vi-VN" === voice.lang){
+      return speech.voice;
+    }
+  });
+  // speech.voice = voices[300];
+  // let voiceSelect = document.querySelector("#voices");
+  // voices.forEach((voice, i) => (voiceSelect.options[i] = new Option(voice.name, i)));
 };
 
 // document.querySelector("#rate").addEventListener("input", () => {
@@ -70,7 +75,7 @@ document.querySelector("#delay").addEventListener("input", () => {
 });
 
 document.querySelector("#start").addEventListener("click", () => {
-  // speech.text = document.querySelector("textarea").value;
+  window.speechSynthesis.cancel();
   intervalId = setInterval(loto, delay * 1000);
   document.getElementById("start").hidden = true;
   document.getElementById("resume").hidden = true;

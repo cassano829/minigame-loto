@@ -1,19 +1,19 @@
 let speech = new SpeechSynthesisUtterance();
-speech.lang = "vi";
+speech.lang = "vi-VN";
 var collections = [];
 var selects = [];
 var selectedString = "";
 for(let i = 1; i <= 90; i++){
   collections.push(i);
 }
-var delay = 2.5;
+var delay = 3;
 
 let voices = [];
 window.speechSynthesis.onvoiceschanged = () => {
   voices = window.speechSynthesis.getVoices();
   speech.voice = voices[300];
-  // let voiceSelect = document.querySelector("#voices");
-  // voices.forEach((voice, i) => (voiceSelect.options[i] = new Option(voice.name, i)));
+  let voiceSelect = document.querySelector("#voices");
+  voices.forEach((voice, i) => (voiceSelect.options[i] = new Option(voice.name, i)));
 };
 
 // document.querySelector("#rate").addEventListener("input", () => {
